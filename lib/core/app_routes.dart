@@ -13,7 +13,7 @@ class AppRoutes {
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => const SplashView()),
-    GetPage(name: login, page: () => const LoginView(), binding: AuthBinding()),
+    GetPage(name: login, page: () => LoginView(), binding: AuthBinding()),
     GetPage(name: signup, page: () => SignupView(), binding: AuthBinding()),
   ];
 }

@@ -11,6 +11,7 @@ class CDTextField extends StatefulWidget {
   final bool enabled;
   final String? errorText;
   final VoidCallback? onEditingComplete;
+  final int? maxLength; // New optional maxLength property
 
   const CDTextField({
     super.key,
@@ -23,6 +24,7 @@ class CDTextField extends StatefulWidget {
     this.enabled = true,
     this.errorText,
     this.onEditingComplete,
+    this.maxLength,
   });
 
   @override
@@ -49,31 +51,31 @@ class _CDTextFieldState extends State<CDTextField> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       onEditingComplete: widget.onEditingComplete,
+      maxLength: widget.maxLength,
       style: const TextStyle(
         fontSize: 16,
         color: AppColors.textDark,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        counterText: '',
+        // Hides the maxLength counter text
         prefixIcon: Icon(widget.icon, color: AppColors.primary),
         suffixIcon: widget.isPassword
             ? IconButton(
-          icon: Icon(
-            _obscureText ? Icons.visibility_off : Icons.visibility,
-            color: AppColors.grey,
-          ),
-          onPressed: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-        )
+                icon: Icon(
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.grey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
             : null,
         labelText: widget.labelText,
-        labelStyle: const TextStyle(
-          color: AppColors.grey,
-          fontSize: 15,
-        ),
+        labelStyle: const TextStyle(color: AppColors.grey, fontSize: 15),
         errorText: widget.errorText,
         filled: true,
         fillColor: AppColors.lightGrey,
@@ -93,7 +95,10 @@ class _CDTextFieldState extends State<CDTextField> {
           borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(color: AppColors.grey),
         ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 14,
+          horizontal: 16,
+        ),
       ),
     );
   }

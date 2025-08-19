@@ -12,6 +12,14 @@ class AppLocalization extends Translations {
       'password': "Password",
       'signUp': "Sign Up",
       'haveAccount': "Already have an account? Login",
+      'errorRequired': "This field is required",
+      'errorInvalidEmail': "Please enter a valid email",
+      'errorInvalidPhone': "Please enter a valid phone number",
+      'loading': "Loading...",
+      'submit': "Submit",
+      'login': "Login",
+      'logout': "Logout",
+      // Add any other needed keys here
     },
     'hi': {
       'title': "नया खाता बनाएं",
@@ -22,6 +30,14 @@ class AppLocalization extends Translations {
       'password': "पासवर्ड",
       'signUp': "साइन अप",
       'haveAccount': "पहले से खाता है? लॉगिन करें",
+      'errorRequired': "यह फ़ील्ड आवश्यक है",
+      'errorInvalidEmail': "कृपया एक मान्य ईमेल दर्ज करें",
+      'errorInvalidPhone': "कृपया एक मान्य फोन नंबर दर्ज करें",
+      'loading': "लोड हो रहा है...",
+      'submit': "जमा करें",
+      'login': "लॉगिन",
+      'logout': "लॉगआउट",
+      // Add any other needed keys here in Hindi
     }
   };
 }
