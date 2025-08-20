@@ -1,7 +1,8 @@
+import 'package:clear_due/modules/auth/bindings/login_binding.dart';
+import 'package:clear_due/modules/auth/bindings/signup_binding.dart';
 import 'package:clear_due/modules/auth/views/signup_view.dart';
 import 'package:get/get.dart';
 
-import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/login_view.dart';
 import '../modules/splash/views/splash_view.dart';
 
@@ -13,7 +14,7 @@ class AppRoutes {
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => const SplashView()),
-    GetPage(name: login, page: () => LoginView(), binding: AuthBinding()),
-    GetPage(name: signup, page: () => SignupView(), binding: AuthBinding()),
+    GetPage(name: login, page: () => LoginView(), binding: LoginBinding()),
+    GetPage(name: signup, page: () => SignupView(), binding: SignupBinding()),
   ];
 }

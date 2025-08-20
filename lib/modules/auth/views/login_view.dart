@@ -5,14 +5,18 @@ import '../../../core/app_colors.dart';
 import '../../../core/app_routes.dart';
 import '../../../shared/widgets/animated_background.dart';
 import '../../../shared/widgets/cd_text_field.dart';
-import '../controllers/auth_controller.dart';
+import '../controllers/login_controller.dart'; // ✅ use LoginController instead of AuthController
 
-class LoginView extends GetView<AuthController> {
+class LoginView extends GetView<LoginController> {
   LoginView({super.key});
+
+  final LoginController controller = Get.put(
+    LoginController(),
+  ); // ✅ use login controller
 
   final RxString selectedLang = 'en'.obs;
 
-  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -20,17 +24,17 @@ class LoginView extends GetView<AuthController> {
     return Scaffold(
       body: Stack(
         children: [
-          // Animated background for consistency
+          // Animated background
           const AnimatedBackground(),
 
-          // Main content with padding and scroll
+          // Main content
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Language selector (similar to signup)
+                  // Language selector
                   Obx(
                     () => Align(
                       alignment: Alignment.topRight,
@@ -76,7 +80,7 @@ class LoginView extends GetView<AuthController> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Screen Title (localized)
+                  // Title
                   Obx(
                     () => AnimatedSwitcher(
                       duration: const Duration(milliseconds: 600),
@@ -94,14 +98,13 @@ class LoginView extends GetView<AuthController> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Phone TextField
+                  // Email TextField
                   CDTextField(
-                    controller: phoneController,
-                    labelText: "mobile".tr,
-                    icon: Icons.phone_android,
-                    keyboardType: TextInputType.phone,
+                    controller: emailController,
+                    labelText: "email".tr,
+                    icon: Icons.email,
+                    keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    maxLength: 10,
                   ),
                   const SizedBox(height: 20),
 
@@ -114,7 +117,7 @@ class LoginView extends GetView<AuthController> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Login button with loading indicator
+                  // Login button
                   Obx(
                     () => controller.isLoading.value
                         ? const CircularProgressIndicator(
@@ -123,7 +126,7 @@ class LoginView extends GetView<AuthController> {
                         : ElevatedButton(
                             onPressed: () {
                               controller.login(
-                                phoneController.text.trim(),
+                                emailController.text.trim(),
                                 passwordController.text.trim(),
                               );
                             },
@@ -164,13 +167,13 @@ class LoginView extends GetView<AuthController> {
 
                   const SizedBox(height: 20),
 
-                  // Navigate to Signup screen
+                  // Navigate to Signup
                   TextButton(
                     onPressed: () {
                       Get.toNamed(AppRoutes.signup);
                     },
                     child: Text(
-                      "haveAccount".tr,
+                      "noAccount".tr,
                       style: TextStyle(
                         color: AppColors.primary,
                         fontWeight: FontWeight.bold,

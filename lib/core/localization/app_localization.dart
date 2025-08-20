@@ -12,6 +12,7 @@ class AppLocalization extends Translations {
       'password': "Password",
       'signUp': "Sign Up",
       'haveAccount': "Already have an account? Login",
+      'noAccount': "Don't have an account? Sign up",
       'errorRequired': "This field is required",
       'errorInvalidEmail': "Please enter a valid email",
       'errorInvalidPhone': "Please enter a valid phone number",

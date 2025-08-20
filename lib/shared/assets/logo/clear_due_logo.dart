@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/app_colors.dart';
-import '../../core/responsive.dart';
+import '../../../core/app_colors.dart';
+import '../../../core/responsive.dart';
 
 class ClearDueLogo extends StatelessWidget {
   final double sizeFactor;

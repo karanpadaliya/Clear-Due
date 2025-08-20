@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/responsive.dart';
 import '../../../shared/widgets/animated_background.dart';
-import '../../../shared/widgets/clear_due_logo.dart';
+import '../../../shared/assets/logo/clear_due_logo.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {

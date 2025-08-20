@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1023288963291",
+    "project_id": "cleardue-e6d55",
+    "storage_bucket": "cleardue-e6d55.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023288963291:android:af614d47735d5ad6641cfe",
+        "android_client_info": {
+          "package_name": "com.example.clear_due"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023288963291-cmsg7kq9j56o8kpm57q7b2pn070ns8t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDLWpElpSPKWLFhuazngLDY6AmQfd29iA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023288963291-cmsg7kq9j56o8kpm57q7b2pn070ns8t0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023288963291-kr6er90bmvtd98j9ljem096gh487heie.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.clearDue"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
