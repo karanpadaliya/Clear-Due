@@ -13,7 +13,9 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
   email: json['email'] as String?,
   role: json['role'] as String?,
   referredBy: json['referredBy'] as String?,
-  createdAt: UserModel._fromTimestamp(json['createdAt'] as Timestamp?),
+  createdAt: json['createdAt'] == null
+      ? null
+      : DateTime.parse(json['createdAt'] as String),
 );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
@@ -23,5 +25,5 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
   'email': instance.email,
   'role': instance.role,
   'referredBy': instance.referredBy,
-  'createdAt': UserModel._toTimestamp(instance.createdAt),
+  'createdAt': instance.createdAt?.toIso8601String(),
 };

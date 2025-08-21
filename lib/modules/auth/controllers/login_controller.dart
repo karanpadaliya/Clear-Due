@@ -1,11 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:clear_due/core/app_routes.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
 
@@ -14,29 +10,26 @@ class LoginController extends GetxController {
       isLoading.value = true;
       errorMessage.value = '';
 
-      // Step 1: Firebase Auth login
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      // Simulate a network delay
+      await Future.delayed(const Duration(seconds: 2));
 
-      // Step 2: Check Firestore database entry
-      DocumentSnapshot userDoc = await _firestore
-          .collection("users")
-          .doc(userCredential.user!.uid)
-          .get();
-
-      if (!userDoc.exists) {
-        // User Auth me hai but Firestore me nahi
-        errorMessage.value =
-        "User record not found in database. Please contact support.";
-        await _auth.signOut();
+      // Simple validation logic
+      if (email.isEmpty || password.isEmpty) {
+        errorMessage.value = "Please enter both email and password.";
+        return;
       }
 
-    } on FirebaseAuthException catch (e) {
-      errorMessage.value = e.message ?? "Login failed";
+      // If login is successful
+      // You can add your own logic here
+      if (email == "1" && password == "1") {
+        Get.snackbar("Success", "Login successful!",
+            snackPosition: SnackPosition.BOTTOM);
+        Get.offAndToNamed(AppRoutes.home);
+      } else {
+        errorMessage.value = "Invalid email or password.";
+      }
     } catch (e) {
-      errorMessage.value = e.toString();
+      errorMessage.value = "An unexpected error occurred.";
     } finally {
       isLoading.value = false;
     }

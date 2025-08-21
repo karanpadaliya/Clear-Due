@@ -1,12 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   final RxBool isLoading = false.obs;
   final RxString errorMessage = ''.obs;
 
@@ -27,54 +21,28 @@ class SignupController extends GetxController {
       isLoading.value = true;
       errorMessage.value = "";
 
-      /// Firebase Auth signup
-      UserCredential userCredential =
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      // Simulate a network delay
+      await Future.delayed(const Duration(seconds: 2));
 
-      final uid = userCredential.user!.uid;
+      // Simple validation and success logic
+      if (!GetUtils.isEmail(email)) {
+        errorMessage.value = "Please enter a valid email address.";
+        return;
+      }
 
-      /// Firestore user data
-      await _firestore.collection("users").doc(uid).set({
-        "uid": uid,
-        "name": name,
-        "phone": phone,
-        "email": email,
-        "referralCode": referralCode.isNotEmpty ? referralCode : null,
-        "role": "user",
-        "createdAt": FieldValue.serverTimestamp(),
-      });
-
-      /// Debug print
-      print("✅ User Created: $uid");
-      print("✅ User Data Saved in Firestore");
-
-      /// Success snackbar
+      // On successful signup
+      print("✅ User Created: $email");
       Get.snackbar(
         "Success 🎉",
         "Account created successfully",
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
       );
 
-    } on FirebaseAuthException catch (e) {
-      errorMessage.value = e.message ?? "Signup failed";
-      Get.snackbar(
-        "Auth Error",
-        errorMessage.value,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
     } catch (e) {
       errorMessage.value = e.toString();
       Get.snackbar(
         "Error",
         errorMessage.value,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
       );
     } finally {
       isLoading.value = false;

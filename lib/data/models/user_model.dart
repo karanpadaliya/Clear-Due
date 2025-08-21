@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 part 'user_model.g.dart';
 
@@ -21,8 +20,8 @@ class UserModel {
   @JsonKey(name: "role")
   String? role;
   @JsonKey(name: "referredBy")
-  String? referredBy; // New field for referral system
-  @JsonKey(name: "createdAt", fromJson: _fromTimestamp, toJson: _toTimestamp)
+  String? referredBy;
+  @JsonKey(name: "createdAt")
   DateTime? createdAt;
 
   UserModel({
@@ -39,12 +38,4 @@ class UserModel {
       _$UserModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserModelToJson(this);
-
-  static DateTime? _fromTimestamp(Timestamp? timestamp) {
-    return timestamp?.toDate();
-  }
-
-  static Timestamp? _toTimestamp(DateTime? dateTime) {
-    return dateTime != null ? Timestamp.fromDate(dateTime) : null;
-  }
 }

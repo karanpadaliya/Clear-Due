@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../core/app_colors.dart';
@@ -14,6 +15,14 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     Get.put(SplashController());
 
+    // ✅ Keep status bar default for Splash
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // transparent or matching splash bg
+      statusBarIconBrightness: Brightness.light, // adjust for splash background
+      systemNavigationBarColor: Colors.black, // optional for bottom nav
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     return Scaffold(
       body: Stack(
         children: [
@@ -25,8 +34,8 @@ class SplashView extends GetView<SplashController> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.primary.withValues(alpha: 0.9),
-                  AppColors.primary.withValues(alpha: 0.7),
+                  AppColors.primary.withOpacity(0.9),
+                  AppColors.primary.withOpacity(0.7),
                   Colors.transparent,
                 ],
                 begin: Alignment.topCenter,
@@ -83,7 +92,7 @@ class SplashView extends GetView<SplashController> {
                     "Your Smart Bill Companion",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.white.withValues(alpha: 0.85),
+                      color: AppColors.white.withOpacity(0.85),
                       fontSize: Responsive.textScale(context, 18),
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.7,

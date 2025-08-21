@@ -31,6 +31,7 @@ class AppLocalization extends Translations {
       'password': "पासवर्ड",
       'signUp': "साइन अप",
       'haveAccount': "पहले से खाता है? लॉगिन करें",
+      'noAccount': "क्या आपके पास खाता नहीं है? साइन अप करें",
       'errorRequired': "यह फ़ील्ड आवश्यक है",
       'errorInvalidEmail': "कृपया एक मान्य ईमेल दर्ज करें",
       'errorInvalidPhone': "कृपया एक मान्य फोन नंबर दर्ज करें",
