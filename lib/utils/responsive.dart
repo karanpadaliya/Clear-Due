@@ -1,8 +1,8 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// You can add this class to the same file or a separate file if you prefer.
 class GridConfig {
   final int itemCount;
   final double spacing;
@@ -20,39 +20,18 @@ class GridConfig {
 }
 
 class Responsive {
-  // Existing static properties from the new code
   static late double _screenWidth;
   static late double _screenHeight;
 
-  // New init method to initialize screen dimensions
   static void init(BuildContext context) {
     final size = MediaQuery.of(context).size;
     _screenWidth = size.width;
     _screenHeight = size.height;
   }
 
-  // Merged methods from both versions
-  static double screenWidth(BuildContext context) {
-    return MediaQuery.of(context).size.width;
-  }
+  static double screenWidth() => _screenWidth;
 
-  static double screenHeight(BuildContext context) {
-    return MediaQuery.of(context).size.height;
-  }
-
-  // Corrected method to use `textScaler` instead of `textScaleFactor`
-  static double textScale(BuildContext context, double size) {
-    return MediaQuery.of(context).textScaler.scale(size);
-  }
-
-  static bool isMobile(BuildContext context) {
-    return screenWidth(context) < 650;
-  }
-
-  // New methods from the second code snippet
-  static double screenWidthInitialized() => _screenWidth;
-
-  static double screenHeightInitialized() => _screenHeight;
+  static double screenHeight() => _screenHeight;
 
   static double scaleHeight(double height) => (_screenHeight / 812) * height;
 
@@ -61,8 +40,6 @@ class Responsive {
   static double scaleText(double size) {
     double factor = _screenWidth / 375;
     factor = factor.clamp(0.85, 1.2);
-    // You'll need to pass a context to this function if you want to use textScaler
-    // For now, this old implementation is kept for backwards compatibility but is not recommended.
     return size * factor;
   }
 
@@ -80,8 +57,28 @@ class Responsive {
   static double getResponsiveOnWidth(context) =>
       MediaQuery.of(context).size.width * 0.001;
 
+  /*double getResponsiveText(context) {
+  if (Platform.isAndroid) {
+    return getWidth(context) > 600 ? 1.5 : 0.8;
+  } else {
+    return getWidth(context) > 600 ? 1.5 : 0.9;
+  }
+}*/
+
+  // double getResponsiveText(BuildContext context) {
+  //   double width = MediaQuery.of(context).size.width;
+  //
+  //   if (kIsWeb) {
+  //     // Web-specific logic
+  //     return width > 600 ? 1.5 : 1.0;
+  //   } else {
+  //     // Mobile or Desktop
+  //     return width > 600 ? 1.5 : 0.9;
+  //   }
+  // }
+
   static double getResponsiveText(context) {
-    final double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     if (kIsWeb) return width > 600 ? 1.5 : 1.0;
     if (Platform.isAndroid) return getWidth(context) > 600 ? 1.5 : 1.0;
     return getWidth(context) > 600 ? 1.5 : 1.0;
@@ -89,9 +86,8 @@ class Responsive {
 
   static double getDashboardResponsive(BuildContext context) =>
       getWidth(context) > 600 ? 1 : 0.9;
-
   static double getDashboardResponsiveText(BuildContext context) =>
-      getWidth(context) > 600 ? 1.1 : 1;
+      getWidth(context) > 600 ? 1.2 : 1;
 
   static GridConfig getGridConfig(BuildContext context, {double? screenWide}) {
     final screenWidth = screenWide ?? getWidth(context);
@@ -101,7 +97,7 @@ class Responsive {
         : screenWidth > 1000
         ? 7
         : screenWidth > 600
-        ? 5
+        ? 6
         : 3;
 
     final itemWidth = (screenWidth - (spacing * (itemCount - 1))) / itemCount;
