@@ -1,0 +1,92 @@
+import 'dart:convert';
+
+import 'package:json_annotation/json_annotation.dart';
+import 'package:myco_flutter/features/my_visit/domain/entites/get_employee_detail_entity.dart';
+
+part 'get_employee_detail.g.dart';
+
+GetEmployeeDetail getEmployeeDetailFromJson(String str) =>
+    GetEmployeeDetail.fromJson(json.decode(str));
+
+String getEmployeeDetailToJson(GetEmployeeDetail data) =>
+    json.encode(data.toJson());
+
+@JsonSerializable()
+class GetEmployeeDetail {
+  @JsonKey(name: "employees")
+  List<Employee>? employees;
+  @JsonKey(name: "message")
+  String? message;
+  @JsonKey(name: "status")
+  String? status;
+
+  GetEmployeeDetail({this.employees, this.message, this.status});
+
+  factory GetEmployeeDetail.fromJson(Map<String, dynamic> json) =>
+      _$GetEmployeeDetailFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GetEmployeeDetailToJson(this);
+}
+
+@JsonSerializable()
+class Employee {
+  @JsonKey(name: "user_id")
+  String? userId;
+  @JsonKey(name: "unit_id")
+  String? unitId;
+  @JsonKey(name: "block_id")
+  String? blockId;
+  @JsonKey(name: "floor_id")
+  String? floorId;
+  @JsonKey(name: "user_first_name")
+  String? userFirstName;
+  @JsonKey(name: "user_last_name")
+  String? userLastName;
+  @JsonKey(name: "user_mobile")
+  String? userMobile;
+  @JsonKey(name: "user_full_name")
+  String? userFullName;
+  @JsonKey(name: "society_id")
+  String? societyId;
+  @JsonKey(name: "designation")
+  String? designation;
+  @JsonKey(name: "short_name")
+  String? shortName;
+  @JsonKey(name: "user_profile_pic")
+  String? userProfilePic;
+
+  Employee({
+    this.userId,
+    this.unitId,
+    this.blockId,
+    this.floorId,
+    this.userFirstName,
+    this.userLastName,
+    this.userMobile,
+    this.userFullName,
+    this.societyId,
+    this.designation,
+    this.shortName,
+    this.userProfilePic,
+  });
+
+  factory Employee.fromJson(Map<String, dynamic> json) =>
+      _$EmployeeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EmployeeToJson(this);
+
+  EmployeeEntity toEntity() => EmployeeEntity(
+    userId: userId,
+    unitId: unitId,
+    blockId: blockId,
+    floorId: floorId,
+    userFirstName: userFirstName,
+    userLastName: userLastName,
+    userMobile: userMobile,
+    userFullName: userFullName,
+    societyId: societyId,
+    designation: designation,
+    shortName: shortName,
+    userProfilePic: userProfilePic,
+  );
+}
